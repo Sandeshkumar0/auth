@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login Page</title>
+</head>
+<body style="margin: 0; padding: 0; background-color: #e2e8f0; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; font-family: Arial, sans-serif;">
+
+  <h1 style="font-size: 24px; color: #2b6cb0; margin-bottom: 20px;">Login Information</h1>
+
+  <div style="background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 90%; max-width: 400px;">
+
+    <h2 style="margin-bottom: 20px; font-size: 20px; font-weight: bold;">Login</h2>
+
+    <form action="/login" method="POST">
+      <!-- Email -->
+      <input
+        type="email"
+        name="email"
+        placeholder="Email"
+        required
+        style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc; font-size: 16px;"
+      />
+
+      <!-- Password + Show/Hide (fixed) -->
+      <div style="display: flex; align-items: center; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 15px; overflow: hidden;">
+        <input
+          id="password"
+          type="password"
+          name="password"
+          placeholder="Password"
+          required
+          style="flex: 1; padding: 10px; font-size: 16px; border: none; outline: none;"
+        />
+        <button
+          type="button"
+          onclick="togglePassword()"
+          style="padding: 10px 15px; background: none; border: none; color: #1e40af; font-weight: bold; cursor: pointer;"
+        >
+          Show
+        </button>
+      </div>
+
+      <!-- Remember Me -->
+      <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 20px; font-size: 14px; cursor: pointer;">
+        <input type="checkbox" name="rememberMe" />
+        Remember Me
+      </label>
+
+      <!-- Submit -->
+      <button
+        type="submit"
+        style="width: 100%; padding: 10px; background-color: #4299e1; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer;"
+        onmouseover="this.style.backgroundColor='#2b6cb0'"
+        onmouseout="this.style.backgroundColor='#4299e1'"
+      >
+        Login Here!
+      </button>
+    </form>
+  </div>
+
+  <script>
+    function togglePassword() {
+      const input = document.getElementById("password");
+      const btn = event.target;
+      if (input.type === "password") {
+        input.type = "text";
+        btn.textContent = "Hide";
+      } else {
+        input.type = "password";
+        btn.textContent = "Show";
+      }
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <style>
+        /* [Same CSS from your original post] */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            width: 100%;
+            min-height: 100vh;
+            background-color: #EBF2FA;
+            display: flex;
+            flex-direction: column;
+        }
+        header {
+            background-color: #2B6CB0;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .logo {
+            height: 40px;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+        }
+        nav a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+        nav a:hover:after {
+            width: 100%;
+        }
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        .auth-btn {
+            background-color: #E63946;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .auth-btn:hover {
+            background-color: #C1121F;
+            transform: translateY(-2px);
+        }
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+        .register-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+            text-align: center;
+        }
+        .register-title {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: #4C9AFF;
+            box-shadow: 0 0 0 2px rgba(76, 154, 255, 0.1);
+        }
+        .password-field {
+            position: relative;
+        }
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #2B6CB0;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .register-btn {
+            background-color: #4BB543;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 12px;
+            width: 100%;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        .register-btn:hover {
+            background-color: #3CA535;
+            transform: translateY(-2px);
+        }
+        .login-link {
+            margin-top: 20px;
+            color: #555;
+        }
+        .login-link a {
+            color: #2B6CB0;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 15px;
+                gap: 15px;
+            }
+            nav ul {
+                gap: 20px;
+            }
+            .register-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+       
+        <nav>
+            <ul>
+                <li><a href="#">HOME</a></li>
+                <li><a href="#">ABOUT US</a></li>
+                <li><a href="#">CONTACT</a></li>
+            </ul>
+        </nav>
+       
+    </header>
+
+    <main>
+        <div class="register-container">
+            <h1 class="register-title">Register</h1>
+            <form id="registerForm">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="fullName" name="name" placeholder="Full Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                </div>
+                <div class="form-group password-field">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                    <button type="button" class="password-toggle" onclick="togglePassword('password')">Show</button>
+                </div>
+                <div class="form-group password-field">
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+                    <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword')">Show</button>
+                </div>
+                <button type="submit" class="register-btn">Register Now!</button>
+            </form>
+            <p class="login-link">Already have an account? <a href="/login">Login here</a></p>
+        </div>
+    </main>
+
+    <script>
+        function togglePassword(fieldId) {
+            const passwordField = document.getElementById(fieldId);
+            const toggleBtn = passwordField.nextElementSibling;
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                toggleBtn.textContent = "Hide";
+            } else {
+                passwordField.type = "password";
+                toggleBtn.textContent = "Show";
+            }
+        }
+
+        document.getElementById('registerForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+
+            try {
+                const response = await fetch('/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, email, password })
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    alert('Registration successful!');
+                    // Optional: redirect
+                    // window.location.href = '/login';
+                } else {
+                    alert('Error: ' + (result.message || 'Registration failed.'));
+                }
+            } catch (error) {
+                alert('Network error: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>
